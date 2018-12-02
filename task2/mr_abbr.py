@@ -1,7 +1,7 @@
 from mrjob.job import MRJob
 import re
 from mrjob.protocol import ReprProtocol
-from statistics import median
+from statistics import median_high
 
 WORD_RE = re.compile(r"[a-zа-я]\. ?[a-zа-я]\.")
 
@@ -18,11 +18,12 @@ class MRFindAbbr(MRJob):
     def combiner(self, abbr, count):
         s = sum(count)
         self.counts.append(s)
-        yield s, abbr
+        yield abbr, s
 
-    def reducer(self, count, abbrs):
-        if count > median(self.counts):
-            yield count, list(abbrs)
+    def reducer(self, abbr, count):
+        s = sum(count)
+        if s > median_high(self.counts):
+            yield abbr, s
 
 
 if __name__ == '__main__':
