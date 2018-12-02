@@ -4,14 +4,14 @@ from mrjob.protocol import ReprProtocol
 import pymorphy2
 from statistics import mean
 
-WORD_RE = re.compile(r"[A-Za-zА-Яа-я][\w]+")
+WORD_RE = re.compile(r"[A-Za-zА-Яа-я][a-zа-я]+")
 
 
 class MRFindNames(MRJob):
     OUTPUT_PROTOCOL = ReprProtocol
 
     def mapper(self, _, line):
-        prob_threshold = 0.5
+        prob_threshold = 0.7
         morph = pymorphy2.MorphAnalyzer()
 
         for word in WORD_RE.findall(line):
