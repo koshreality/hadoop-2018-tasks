@@ -1,0 +1,1 @@
+'Longest word'	[63, 'rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz']

@@ -13,6 +13,7 @@ class MRFindNames(MRJob):
     def mapper(self, _, line):
         prob_threshold = 0.5
         morph = pymorphy2.MorphAnalyzer()
+
         for word in WORD_RE.findall(line):
             for p in morph.parse(word):
                 if 'Name' in p.tag and p.score >= prob_threshold:

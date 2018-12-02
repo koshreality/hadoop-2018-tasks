@@ -16,7 +16,7 @@ class MRMostFreq(MRJob):
         yield None, (sum(counter), word)
 
     def reducer(self, _, words):
-        yield "The most frequent word", max(words)[1]
+        yield "The most frequent word", max(words)
 
 
 if __name__ == '__main__':

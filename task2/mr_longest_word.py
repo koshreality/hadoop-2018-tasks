@@ -1,8 +1,8 @@
 from mrjob.job import MRJob
-# from mrjob.protocol import TextProtocol
+from mrjob.protocol import ReprProtocol
 import re
 
-WORD_RE = re.compile(r"[\w']+")
+WORD_RE = re.compile(r"[\w]+")
 
 
 # class WordLen:
@@ -19,6 +19,7 @@ WORD_RE = re.compile(r"[\w']+")
 
 
 class MRWordMaxLen(MRJob):
+    OUTPUT_PROTOCOL = ReprProtocol
 
     def mapper(self, _, line):
         for word in WORD_RE.findall(line):
