@@ -30,7 +30,7 @@ class MRWordMaxLen(MRJob):
         yield None, (list(lengths)[0], word)
 
     def reducer(self, _, words):
-        yield None, max(words)
+        yield "Longest word", max(words)
 
 
 if __name__ == '__main__':
